@@ -4,8 +4,8 @@ Command line RDF data validator against SHACL shapes.
 ## To compile the application:
 1. Make sure you have Java, the JDK and Maven installed.
 2. Clone the current repository.
-3. Run `mvn clean compile assembly:single`, as a result you should be able to access to a JAR file in the `target` folder.
-4. Run `java -jar target/validator-0.0.1-SNAPSHOT-jar-with-dependencies.jar path/to/rdf_data.ttl path/to/shacl_shapes.ttl path/to/save/report.ttl` to run the JAR file.
+3. Run `mvn clean compile assembly:single`
+4. As a result you should be able to access to a JAR file in the `target` folder.
 
 The JAR provided in `target` was compiled with the Java openjdk version 17.0.11 and Apache Maven 3.9.6.
 
@@ -16,6 +16,11 @@ The JAR provided in `target` was compiled with the Java openjdk version 17.0.11 
     *     <report>   Validation report
 
 The fields marked with an \* are mandatory.
+
+### Example
+```bash
+java -jar target/validator-0.0.1-SNAPSHOT-jar-with-dependencies.jar path/to/rdf_data.ttl path/to/shacl_shapes.ttl path/to/save/report.ttl
+```
 
 ## Options
     -h, --help     Display help
