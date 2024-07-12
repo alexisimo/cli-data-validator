@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.jena.geosparql.configuration.GeoSPARQLConfig;
 import org.apache.jena.graph.Graph;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -28,6 +29,8 @@ public class JenaValidator {
         Graph shapesGraph = RDFDataMgr.loadGraph(SHAPES);
         int shapesGraphSize = shapesGraph.size() ;
         System.out.println("Shapes graph size: " + shapesGraphSize);
+        
+        GeoSPARQLConfig.setupMemoryIndex();          
 
         Shapes shapes = Shapes.parse(shapesGraph);
         
