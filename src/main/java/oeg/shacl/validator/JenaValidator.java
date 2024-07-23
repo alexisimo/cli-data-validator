@@ -8,6 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.jena.geosparql.configuration.GeoSPARQLConfig;
 import org.apache.jena.graph.Graph;
+import org.apache.jena.query.Dataset;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.shacl.ShaclValidator;
@@ -20,8 +23,15 @@ public class JenaValidator {
     public static void validate(String DATA, String SHAPES, String REPORT) throws IOException {
 
         long startLoadTime = System.nanoTime();
-        Graph dataGraph = RDFDataMgr.loadGraph(DATA);
-		long estimatedLoadTime = System.nanoTime() - startLoadTime;
+        Dataset dataDataset = RDFDataMgr.loadDataset(DATA);
+        Model dataModel = ModelFactory.createDefaultModel();
+        Graph dataGraph = dataModel.getGraph();
+        if (DATA.endsWith(".nq")) {
+            dataGraph = dataDataset.getUnionModel().getGraph();
+        } else {
+            dataGraph = dataDataset.getDefaultModel().getGraph();
+        }
+        long estimatedLoadTime = System.nanoTime() - startLoadTime;
         int dataGraphSize = dataGraph.size() ;
         System.out.println("Data graph size: " + dataGraphSize);
 		System.out.println("Estimated load time: " + TimeUnit.NANOSECONDS.toMillis(estimatedLoadTime)/1000.0 );
