@@ -33,3 +33,14 @@ Estimated validation time: 0.039
 Graph size is given in number of triples and time in seconds.
 ## Options
     -h, --help     Display help
+
+### Docker
+After the application is compiled into a JAR, a Docker image can be built by making use of the provided Dockerfile. \
+Type the command `docker build -t cli_data_validator .` to get a ready to use image.
+
+### Example
+To feed the app with data and shapes files a volume should be configured. The following listing is an example of how the docker image could be used. 
+```docker
+docker run -v $(pwd)/data:/cli-data-validator/data --rm cli_data_validator:latest /cli-data-validator/data/example_data.ttl /cli-data-validator/data/example_shapes.ttl /cli-data-validator/data/example_report.ttl
+
+```
